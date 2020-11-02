@@ -5,21 +5,27 @@ import java.util.Scanner;
 /**
  * @author liuch
  * @date 2020/9/15 - 20:55
+ * front指向队列的第一个元素  默认 0
+ * 指向对尾元素的后一个位置 默认 0
+ * 当队列满时 (rear + 1)% maxSize = front
+ * 当队列为空时 rear == front
+ * 队列中有效数据个数 ：(rear + maxSize -front) %maxSize
  */
-public class ArrayQueueDemo {
+public class CircleQueueDemo {
     public static void main(String[] args) {
-        ArrayQueue queue = new ArrayQueue(3);
+        CircleQueue queue = new CircleQueue(4);//其队列的有效数据为3
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
-        char key = ' ';
+        char circle = ' ';
+        //环形队列测试
         while (loop){
-            System.out.println("s(show): 显示队列");
+            System.out.println("s(show1): 显示队列");
             System.out.println("e(exit): 退出");
             System.out.println("a(add): 添加数据");
             System.out.println("g(get): 获取数据");
-            key = scanner.next().charAt(0);
+            circle = scanner.next().charAt(0);
 
-            switch (key){
+            switch (circle){
                 case 's':
                     try {
                         queue.showAllData();
@@ -32,6 +38,7 @@ public class ArrayQueueDemo {
                     System.out.println("输入一个数");
                     int data = scanner.nextInt();
                     queue.add(data);
+                    System.out.println();
                     break;
                 case 'g':
                     try {
@@ -62,16 +69,18 @@ public class ArrayQueueDemo {
     }
 }
 
-class ArrayQueue{
+class CircleQueue{
     int maxSize; //最大size
     int front; //front 指针
     int rear; //rear 指针
     int arr[];
 
-    public ArrayQueue(int maxSize) {
+    public CircleQueue(int maxSize) {
         this.maxSize = maxSize;
-        front = -1; //指向对列首的前一个位置
-        rear = -1; //指向对尾的数据(包含)
+        //指向队列的第一个元素  默认 0
+        front = 0;
+        //指向对尾元素的后一个位置 默认 0
+        rear = 0;
         arr = new int[maxSize];
     }
 
@@ -80,7 +89,7 @@ class ArrayQueue{
      * @return
      */
     private boolean isFull(){
-        return rear == maxSize -1;
+        return (rear + 1) % maxSize == front;
     }
     //判断队列是否为空
     private boolean isEmpty(){
@@ -93,14 +102,21 @@ class ArrayQueue{
             System.out.println("队列已满,不能添加");
             return;
         }
-        arr[++rear] = data; //rear指针后移
+        //rear指向尾部的后一个位置
+        arr[rear] = data;
+
+        //环形数组取模
+        rear = (rear + 1) % maxSize;
     }
     //取数据
     public int get(){
         if (isEmpty()) {
             throw new RuntimeException("队列为空,不能取数据");
         }
-        return arr[++front]; //front 后移
+        //front指向队列的第一个元素
+        int result = arr[front];
+        front = (front + 1 )% maxSize;
+        return result; //front 后移
     }
     //显示队列所有数据
     public void showAllData(){
@@ -108,16 +124,21 @@ class ArrayQueue{
             throw new RuntimeException("队列为空,不能取数据");
         }
 
-        for (int i = 0; i < arr.length; i++) {
-            System.out.printf("arr[%d] = %d\n",i,arr[i]);
+        for (int i = front; i < front + size(); i++) {
+            System.out.printf("arr[%d] = %d\n",i % maxSize,arr[i % maxSize]);
         }
+    }
+
+    //有效数据size
+    public int size(){
+        return (rear + maxSize - front) % maxSize;
     }
     //显示对首数据
     public int headQueue(){
         if (isEmpty()){
             throw new RuntimeException("队列为空,不能取数据");
         }
-        return arr[front + 1]; // +1 :front 指向队列前一个位置
+        return arr[front]; // +1 :front 指向队列前一个位置
     }
 }
 
