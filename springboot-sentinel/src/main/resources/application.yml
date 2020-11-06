@@ -1,0 +1,10 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: sentinel-test
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080 #支持500以下集群监控
+#      eager: true #关闭这个延迟
