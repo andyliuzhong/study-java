@@ -7,11 +7,11 @@ import java.util.List;
  * @author liuch
  * @date 2020/10/23 - 22:04
  */
-public class University extends OranizationCoponent {
-    //学校可以有多个院系
+public class Colleage extends OranizationCoponent {
+    //院系可以有多个Department
     List<OranizationCoponent> oranizationCoponents = new ArrayList<>();
 
-    public University(String name, String desc) {
+    public Colleage(String name, String desc) {
         super(name, desc);
     }
 
