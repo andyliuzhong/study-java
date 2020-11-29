@@ -34,7 +34,7 @@ public class Queue8 {
         if (n==8){ //n=8说明 第8行已经成功,准备放第九行
             print();//打印当前这种解法
             return;
-        }
+        } 
 
         //判断是否满足规则
         for (int i = 0; i < maxLength; i++) {
