@@ -15,4 +15,9 @@
     <dubbo:service interface="com.daye.liu.service.UserService" ref="userService"></dubbo:service>
 
     <bean class="com.daye.liu.impl.UserServiceImpl" id="userService"></bean>
+
+   <!-- 配置监控中心
+    <dubbo:monitor protocol="registry"></dubbo:monitor>
+    &lt;!&ndash;或&ndash;&gt;
+    <dubbo:monitor address="127.0.0.1:7070"></dubbo:monitor>-->
 </beans>

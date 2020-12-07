@@ -4,6 +4,7 @@ package com.daye.liu.impl;
 import com.daye.liu.bean.UserAddress;
 import com.daye.liu.service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Override
     public List<UserAddress> getUserAddrsById(String s) {
+        System.out.println("=======================call userService date:" + LocalDateTime.now());
         UserAddress address1 = new UserAddress();
         address1.setUserAddress("tian fu street");
         address1.setPhoneNo("15982873604");
