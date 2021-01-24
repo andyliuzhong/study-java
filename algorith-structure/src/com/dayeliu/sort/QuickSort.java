@@ -10,7 +10,8 @@ import java.util.Arrays;
  */
 public class QuickSort {
     public static void main(String[] args) {
-        int[] arr = {-9,0,78,0,23,-567,70,0};
+//        int[] arr = {-9,0,78,0,23,-567,70,0};
+        int[] arr = {3,2,5,2,1};
 
         System.out.println(Arrays.toString(quickSort(arr, 0, arr.length -1)));
     }

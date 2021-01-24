@@ -16,6 +16,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserAddress> getUserAddrsById(String s) {
         System.out.println("=======================call userService date:" + LocalDateTime.now());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         UserAddress address1 = new UserAddress();
         address1.setUserAddress("tian fu street");
         address1.setPhoneNo("15982873604");

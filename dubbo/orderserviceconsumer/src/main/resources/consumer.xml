@@ -8,11 +8,25 @@
     <dubbo:application name="order-service-consumer" logger="slf4j"></dubbo:application>
     <!--dubbo 注册中心-->
     <dubbo:registry address="zookeeper://47.115.41.44:2181"></dubbo:registry>
-    
-    <!--声明要调用的远程接口  生成远程服务代理-->
-    <dubbo:reference interface="com.daye.liu.service.UserService" id="userService"></dubbo:reference>
+
+
+
+
+
+    <!--声明要调用的远程接口  生成远程服务代理 timeout 默认使用consumer属性 默认1000ms-->
+    <!--retries 不包含第一次  在幂等方法上设置重试次数-查询 删除 更新, 非幂等方法不能设置-insert -->
+    <!--version=* 随机调用 版本-->
+    <dubbo:reference interface="com.daye.liu.service.UserService" id="userService"
+                     check="false" timeout="5000" retries="3" version="1.0.0"
+                        stub="com.daye.liu.service.UserServiceStub">
+        <!--方法timeout优先-->
+        <dubbo:method name="getUserAddrsById" timeout="2000"></dubbo:method>
+
+    </dubbo:reference>
     <!-- 配置监控中心
     <dubbo:monitor protocol="registry"></dubbo:monitor>
     &lt;!&ndash;或&ndash;&gt;
     <dubbo:monitor address="127.0.0.1:7070"></dubbo:monitor>-->
+    <!--配置所以消费者属性 timeout优先级小于reference小于method-->
+    <dubbo:consumer check="false" timeout="2000"></dubbo:consumer>
 </beans>

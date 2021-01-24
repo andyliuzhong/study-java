@@ -1,6 +1,5 @@
 package com.dayeliu.sort;
 
-import java.util.Arrays;
 
 /**
  * @author liuch

@@ -12,9 +12,16 @@
     <!--指定通信协议 端口-->
     <dubbo:protocol name="dubbo" port="20880"></dubbo:protocol>
     <!--声明暴露的服务-->
-    <dubbo:service interface="com.daye.liu.service.UserService" ref="userService"></dubbo:service>
+    <dubbo:service interface="com.daye.liu.service.UserService" ref="userService01"
+                   timeout="5000" version="1.0.0">
+    </dubbo:service>
+    <!--<dubbo:service interface="com.daye.liu.service.UserService" ref="userService02"
+                   timeout="5000" version="2.0.0">
+    </dubbo:service>-->
 
-    <bean class="com.daye.liu.impl.UserServiceImpl" id="userService"></bean>
+    <bean class="com.daye.liu.impl.UserServiceImpl" id="userService01"></bean>
+    <!--不同version实现-->
+    <!--<bean class="com.daye.liu.impl.UserServiceImpl02" id="userService02"></bean>-->
 
    <!-- 配置监控中心
     <dubbo:monitor protocol="registry"></dubbo:monitor>
